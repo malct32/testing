@@ -1,0 +1,44 @@
+echo "# testing" >> README.md
+git init
+git add README.md
+Sub convertpdftowordthenexcel()
+'issues: how to copy only certain page to excel
+'benefit: can loop through multiple pdf's and save as multiple sheets in excel
+
+Dim wordapp As Word.Application
+Dim input1 As String
+
+input1 = InputBox("what is the complete path to the file?")
+    
+    'check if the doc exist
+    If Err.Number = 429 Then
+        MsgBox ("file not found, abort")
+        Exit Sub
+    ElseIf input1 = "" Then
+        MsgBox ("No inputfile found, abort")
+        Exit Sub
+    Else
+    End If
+    
+    'open pdf in word
+    Set wordapp = New Word.Application
+   
+    wordapp.documents.Open Filename:=input1, Format:="PDF Files", ConfirmConversions:=False
+    wordapp.Visible = True
+    
+    'copy the content of the word file
+    'wordapp.ActiveDocument.Content.Copy       <----uncomment this if you want to copy the entire doc
+    wordapp.ActiveDocument.Tables(2).Range.Copy
+    
+    'go to excel and paste it there
+    Workbooks("open pdf using doc.xlsm").Worksheets("Sheet1").Activate
+    Cells(1, 1).PasteSpecial Paste:="Text"
+   
+'close the word doc
+wordapp.Quit savechanges:=wdDoNotSaveChanges
+
+End Sub
+
+git commit -m "first commit"
+git remote add origin https://github.com/malct32/testing.git
+git push -u origin master
