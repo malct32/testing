@@ -1,6 +1,5 @@
-echo "# testing" >> README.md
-git init
-git add README.md
+#testinggithub
+
 Sub convertpdftowordthenexcel()
 'issues: how to copy only certain page to excel
 'benefit: can loop through multiple pdf's and save as multiple sheets in excel
@@ -38,7 +37,3 @@ input1 = InputBox("what is the complete path to the file?")
 wordapp.Quit savechanges:=wdDoNotSaveChanges
 
 End Sub
-
-git commit -m "first commit"
-git remote add origin https://github.com/malct32/testing.git
-git push -u origin master
